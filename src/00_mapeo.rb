@@ -12,6 +12,7 @@ def mapeo
 end
 
 # Por ejemplo, la siguiente invocación:
+puts '* Invocando: mapeo(100, 2.501, :ttps_ruby_2022, { parcial: true, practicas: [1, 2] }, [0, 3, 0, 3], nil, true, false)'
 resultado = mapeo(100, 2.501, :ttps_ruby_2022, { parcial: true, practicas: [1, 2] }, [0, 3, 0, 3], nil, true, false)
 # Debería retornar:
 correcto = resultado == { 0 => 0, 1 => 40, 2 => 224, 3 => 864, 4 => 384, 5 => 0, 6 => 192, 7 => 280 }
