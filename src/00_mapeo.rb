@@ -19,7 +19,7 @@ correcto = resultado == { 0 => 0, 1 => 40, 2 => 224, 3 => 864, 4 => 384, 5 => 0,
 
 # Validación para que puedas verificar este caso de prueba (NO IMPLICA QUE EL EJERCICIO ESTÉ APROBADO)
 if correcto
-  puts '¡Muy bien, la implementación arroja un resultado correcto!'
+  puts '¡Muy bien, tu implementación arroja un resultado correcto!'
 else
   puts 'Ups.. Tu resolución no funciona aún. ¡Seguí intentando!'
   puts "El resultado que arrojó es:\n#{resultado.inspect}"
