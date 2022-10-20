@@ -25,10 +25,42 @@
 # incluyan.
 
 # Incorporar dependencias acá
-# ...
+require_relative '01_cache'
 
 # Implementar mixin Cacheable acá
-# ...
+module Cacheable
+  def cache
+    Cache.instancia
+  end
+
+  def cachear
+    cache.cargar(clave_cache, self)
+  end
+
+  def limpiar_cache
+    cache.remover(clave_cache)
+  end
+
+  def cacheada?
+    !cache.expirada?(clave_cache)
+  end
+
+  module MetodosDeClase
+    def cache
+      Cache.instancia
+    end
+
+    def limpiar_cache
+      cache.entradas
+          .select { |clave| clave.start_with?(name) }
+          .each { |clave| cache.remover(clave) }
+    end
+  end
+
+  def self.included(klass)
+    klass.extend MetodosDeClase
+  end
+end
 
 class Avion
   include Cacheable

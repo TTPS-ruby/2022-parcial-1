@@ -25,3 +25,45 @@
 #   * Para obtener un timestamp actual podes utilizar `Time.now.to_i`.
 #   * Para simular el paso del tiempo, podés utilizar el método `sleep`.
 #   * Analizá si conviene modelar los métodos de la caché como métodos de instancia o de clase.
+
+class Cache
+  def self.instancia
+    @instancia ||= new
+  end
+
+  def initialize
+    @cache = {}
+  end
+
+  def cargar(clave, valor)
+    @cache[clave] = { valor: valor, timestamp: Time.now.to_i }
+  end
+
+  def expirada?(clave)
+    expirada = Time.now.to_i - timestamp_de(clave) > 3
+    if expirada
+      remover(clave)
+    end
+    expirada
+  end
+
+  def timestamp_de(clave)
+    @cache.dig(clave, :timestamp) || 0
+  end
+
+  def entradas
+    @cache.keys.reject do |clave|
+      expirada?(clave)
+    end
+  end
+
+  def valor_de(clave)
+    unless expirada?(clave)
+      @cache.dig(clave, :valor)
+    end
+  end
+
+  def remover(clave)
+    @cache.delete(clave)
+  end
+end

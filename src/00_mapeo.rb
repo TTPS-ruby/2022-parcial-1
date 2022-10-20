@@ -8,7 +8,12 @@
 # será el resultado de multiplicar la longitud de la representación en String del parámetro
 # por la cantidad de parámetros recibidos y por el índice del parámetro.
 
-def mapeo
+def mapeo(*args)
+  hash = {} # Hash.new
+  args.each_with_index do |e, i|
+    hash[i] = e.to_s.length * i * args.length
+  end
+  hash
 end
 
 # Por ejemplo, la siguiente invocación:
